@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Core Utils - Common Utilities.
+Copyright 2015-2016 GRyCAP (Universitat Politecnica de Valencia)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+This product combines work with different licenses. See the "NOTICE" text
+file for details on the various modules and licenses.
+
+The "NOTICE" text file is part of the distribution. Any derivative works
+that you distribute must include a readable copy of the "NOTICE" text file.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.grycap.coreutils</groupId>
+		<artifactId>coreutils</artifactId>
+		<version>0.1.0</version>
+	</parent>
+	
+	<artifactId>coreutils-logging</artifactId>
+	<name>Common logging utilities</name>
+	<description>Provides utilities to simplify logging</description>
+	<url>https://github.com/grycap/coreutils</url>	
+	
+	<dependencies>
+		<!-- GRyCAP common utilities -->
+		<dependency>
+			<groupId>org.grycap.coreutils</groupId>
+			<artifactId>coreutils-common</artifactId>
+			<version>${org.grycap.coreutils.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.grycap.coreutils</groupId>
+			<artifactId>coreutils-test</artifactId>
+			<version>${org.grycap.coreutils.version}</version>
+			<scope>test</scope>
+		</dependency>		
+		
+		<!-- Logback and SLF4J logging framework -->		
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jul-to-slf4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>log4j-over-slf4j</artifactId>
+		</dependency>
+	</dependencies>
+</project>

@@ -30,3 +30,4 @@ Utilities to facilitate Java applications development.
 ## Continuous integration
 
 ``$ mvn clean verify coreutils``
+

@@ -118,6 +118,14 @@ public class FiberExpectationInitializer implements ExpectationInitializer {
 					.withHeaders(new Header("Cache-Control", "public, max-age=86400"))
 					.withDelay(new Delay(TimeUnit.MILLISECONDS, r.getDelay())));
 		});
+		// highly concurrent
+		for (int i = 0; i < 100; i++) {
+			client.when(request().withMethod("GET").withPath(String.format("/test/concurrent/%d", i)))
+			.respond(response().withStatusCode(200)
+					.withHeaders(new Header("Content-Type", "text/plain; charset=utf-8"),
+							new Header("Cache-Control", "public, max-age=86400"))
+					.withBody(new StringBuilder("Response-to-").append(i).toString()));
+		}
 	}
 
 }

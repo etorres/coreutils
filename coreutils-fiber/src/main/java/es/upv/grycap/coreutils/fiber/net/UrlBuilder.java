@@ -21,7 +21,7 @@
  * that you distribute must include a readable copy of the "NOTICE" text file.
  */
 
-package org.grycap.coreutils.fiber.net;
+package es.upv.grycap.coreutils.fiber.net;
 
 import static java.net.URLDecoder.decode;
 import static java.nio.charset.Charset.defaultCharset;

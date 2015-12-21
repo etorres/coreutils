@@ -21,7 +21,7 @@
  * that you distribute must include a readable copy of the "NOTICE" text file.
  */
 
-package org.grycap.coreutils.test.rules;
+package es.upv.grycap.coreutils.test.rules;
 
 import static java.util.Optional.ofNullable;
 
@@ -42,7 +42,7 @@ public class TestWatcher2 extends TestWatcher {
 	 * Default header that will be printed before the status messages.
 	 */
 	private static final String DEFAULT_HEADER = " >>> TestUtils >>> ";
-	
+
 	/**
 	 * Default footer that will be printed after the status messages.
 	 */

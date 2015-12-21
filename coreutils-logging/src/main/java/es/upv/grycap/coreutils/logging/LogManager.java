@@ -21,7 +21,7 @@
  * that you distribute must include a readable copy of the "NOTICE" text file.
  */
 
-package org.grycap.coreutils.logging;
+package es.upv.grycap.coreutils.logging;
 
 import static org.slf4j.LoggerFactory.getLogger;
 import static org.slf4j.bridge.SLF4JBridgeHandler.install;
@@ -44,11 +44,11 @@ public class LogManager {
 	private final static AtomicBoolean PRISTINE = new AtomicBoolean(true);
 
 	private LogManager() { }
-	
+
 	public static LogManager getLogManager() {
 		return new LogManager();
 	}
-	
+
 	/**
 	 * The logging system is automatically configured when the method {@link LogManager#getLogger(Class)} is called. 
 	 * This method is conveniently provided to initialize the logging system before creating any logger with this class.

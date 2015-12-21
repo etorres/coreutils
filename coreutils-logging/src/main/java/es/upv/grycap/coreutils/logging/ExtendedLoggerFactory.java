@@ -21,12 +21,11 @@
  * that you distribute must include a readable copy of the "NOTICE" text file.
  */
 
-package org.grycap.coreutils.logging;
+package es.upv.grycap.coreutils.logging;
 
 import static java.util.Objects.requireNonNull;
 
 import org.slf4j.Logger;
-
 
 /**
  * Wraps the SLF4J {@link org.slf4j.LoggerFactory}
@@ -43,7 +42,7 @@ public final class ExtendedLoggerFactory {
 	 * @return A logger named corresponding to the class passed as parameter.
 	 */
 	public static Logger getLogger(final Class<?> clazz) {
-		org.grycap.coreutils.logging.LogManager.getLogManager().init();
+		es.upv.grycap.coreutils.logging.LogManager.getLogManager().init();
 		return org.slf4j.LoggerFactory.getLogger(requireNonNull(clazz, "A non-null class expected"));
 	}
 

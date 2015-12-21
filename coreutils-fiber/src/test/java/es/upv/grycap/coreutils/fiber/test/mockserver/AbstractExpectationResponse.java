@@ -21,7 +21,7 @@
  * that you distribute must include a readable copy of the "NOTICE" text file.
  */
 
-package org.grycap.coreutils.fiber.test.mockserver;
+package es.upv.grycap.coreutils.fiber.test.mockserver;
 
 import java.util.List;
 import java.util.Map;

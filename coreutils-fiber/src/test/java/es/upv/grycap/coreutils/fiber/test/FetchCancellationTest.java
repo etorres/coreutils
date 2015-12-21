@@ -21,10 +21,10 @@
  * that you distribute must include a readable copy of the "NOTICE" text file.
  */
 
-package org.grycap.coreutils.fiber.test;
+package es.upv.grycap.coreutils.fiber.test;
 
+import static es.upv.grycap.coreutils.fiber.test.mockserver.FiberExpectationInitializer.MOCK_SERVER_BASE_URL;
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphanumeric;
-import static org.grycap.coreutils.fiber.test.mockserver.FiberExpectationInitializer.MOCK_SERVER_BASE_URL;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -38,11 +38,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-import org.grycap.coreutils.fiber.http.HttpDataFetcher;
-import org.grycap.coreutils.fiber.http.HttpDataFetcher.FetchStatus;
-import org.grycap.coreutils.test.category.IntegrationTests;
-import org.grycap.coreutils.test.rules.TestPrinter;
-import org.grycap.coreutils.test.rules.TestWatcher2;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -52,6 +47,11 @@ import org.junit.rules.TestRule;
 import com.google.common.collect.ImmutableList;
 
 import co.paralleluniverse.fibers.futures.AsyncCompletionStage;
+import es.upv.grycap.coreutils.fiber.http.HttpDataFetcher;
+import es.upv.grycap.coreutils.fiber.http.HttpDataFetcher.FetchStatus;
+import es.upv.grycap.coreutils.test.category.IntegrationTests;
+import es.upv.grycap.coreutils.test.rules.TestPrinter;
+import es.upv.grycap.coreutils.test.rules.TestWatcher2;
 
 /**
  * Tests data fetching with cancellation.

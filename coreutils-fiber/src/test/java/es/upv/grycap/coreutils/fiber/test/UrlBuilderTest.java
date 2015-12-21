@@ -21,12 +21,12 @@
  * that you distribute must include a readable copy of the "NOTICE" text file.
  */
 
-package org.grycap.coreutils.fiber.test;
+package es.upv.grycap.coreutils.fiber.test;
 
 import static com.google.common.collect.ImmutableMap.of;
+import static es.upv.grycap.coreutils.fiber.net.UrlBuilder.getUrlBuilder;
 import static java.util.Collections.emptyMap;
 import static org.apache.commons.lang3.StringUtils.trim;
-import static org.grycap.coreutils.fiber.net.UrlBuilder.getUrlBuilder;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -37,10 +37,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
 
-import org.grycap.coreutils.fiber.net.UrlBuilder;
-import org.grycap.coreutils.test.category.SanityTests;
-import org.grycap.coreutils.test.rules.TestPrinter;
-import org.grycap.coreutils.test.rules.TestWatcher2;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -49,6 +45,11 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
+
+import es.upv.grycap.coreutils.fiber.net.UrlBuilder;
+import es.upv.grycap.coreutils.test.category.SanityTests;
+import es.upv.grycap.coreutils.test.rules.TestPrinter;
+import es.upv.grycap.coreutils.test.rules.TestWatcher2;
 
 /**
  * Tests {@link UrlBuilder}.

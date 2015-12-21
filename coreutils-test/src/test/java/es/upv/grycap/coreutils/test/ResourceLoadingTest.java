@@ -21,10 +21,10 @@
  * that you distribute must include a readable copy of the "NOTICE" text file.
  */
 
-package org.grycap.coreutils.test;
+package es.upv.grycap.coreutils.test;
 
+import static es.upv.grycap.coreutils.test.util.ResourceLoadingUtils.getResourceFiles;
 import static java.io.File.separator;
-import static org.grycap.coreutils.test.util.ResourceLoadingUtils.getResourceFiles;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -34,14 +34,15 @@ import static org.hamcrest.collection.IsEmptyCollection.empty;
 
 import java.util.List;
 
-import org.grycap.coreutils.test.category.FunctionalTests;
-import org.grycap.coreutils.test.rules.TestPrinter;
-import org.grycap.coreutils.test.rules.TestWatcher2;
-import org.grycap.coreutils.test.util.ResourceLoadingUtils;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.rules.TestRule;
+
+import es.upv.grycap.coreutils.test.category.FunctionalTests;
+import es.upv.grycap.coreutils.test.rules.TestPrinter;
+import es.upv.grycap.coreutils.test.rules.TestWatcher2;
+import es.upv.grycap.coreutils.test.util.ResourceLoadingUtils;
 
 /**
  * Tests resource loading utilities provided by {@link ResourceLoadingUtils}.

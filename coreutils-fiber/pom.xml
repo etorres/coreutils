@@ -26,7 +26,7 @@ that you distribute must include a readable copy of the "NOTICE" text file.
 	<modelVersion>4.0.0</modelVersion>
 	
 	<parent>
-		<groupId>org.grycap.coreutils</groupId>
+		<groupId>es.upv.grycap.coreutils</groupId>
 		<artifactId>coreutils</artifactId>
 		<version>0.1.0</version>
 	</parent>
@@ -39,14 +39,14 @@ that you distribute must include a readable copy of the "NOTICE" text file.
 	<dependencies>
 		<!-- GRyCAP common utilities -->
 		<dependency>
-			<groupId>org.grycap.coreutils</groupId>
+			<groupId>es.upv.grycap.coreutils</groupId>
 			<artifactId>coreutils-logging</artifactId>
-			<version>${org.grycap.coreutils.version}</version>
+			<version>${es.upv.grycap.coreutils.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.grycap.coreutils</groupId>
+			<groupId>es.upv.grycap.coreutils</groupId>
 			<artifactId>coreutils-test</artifactId>
-			<version>${org.grycap.coreutils.version}</version>
+			<version>${es.upv.grycap.coreutils.version}</version>
 			<scope>test</scope>
 		</dependency>
 		
@@ -249,7 +249,7 @@ that you distribute must include a readable copy of the "NOTICE" text file.
                 <groupId>org.mock-server</groupId>
                 <artifactId>mockserver-maven-plugin</artifactId>
                 <configuration>
-                	<initializationClass>org.grycap.coreutils.fiber.test.mockserver.FiberExpectationInitializer</initializationClass>
+                	<initializationClass>es.upv.grycap.coreutils.fiber.test.mockserver.FiberExpectationInitializer</initializationClass>
                 </configuration>
             </plugin>
 			<!-- Maven Surefire Plugin -->

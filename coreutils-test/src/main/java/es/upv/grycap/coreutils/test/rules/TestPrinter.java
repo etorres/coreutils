@@ -21,7 +21,7 @@
  * that you distribute must include a readable copy of the "NOTICE" text file.
  */
 
-package org.grycap.coreutils.test.rules;
+package es.upv.grycap.coreutils.test.rules;
 
 import static java.util.Optional.ofNullable;
 

@@ -21,7 +21,7 @@
  * that you distribute must include a readable copy of the "NOTICE" text file.
  */
 
-package org.grycap.coreutils.fiber.test.mockserver;
+package es.upv.grycap.coreutils.fiber.test.mockserver;
 
 import static java.nio.file.Files.readAllBytes;
 import static java.util.Optional.ofNullable;

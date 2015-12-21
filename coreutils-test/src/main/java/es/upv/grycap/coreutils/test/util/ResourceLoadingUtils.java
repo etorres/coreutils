@@ -21,7 +21,7 @@
  * that you distribute must include a readable copy of the "NOTICE" text file.
  */
 
-package org.grycap.coreutils.test.util;
+package es.upv.grycap.coreutils.test.util;
 
 import static java.io.File.separator;
 import static java.util.Arrays.asList;
@@ -56,7 +56,7 @@ public class ResourceLoadingUtils {
 	 * subdirectories).
 	 */
 	public static final String TEST_DIRNAME = "testfiles";
-	
+
 	/**
 	 * Finds the directory where the test files are located.
 	 */
@@ -109,9 +109,9 @@ public class ResourceLoadingUtils {
 	 * @since 0.1.0
 	 */
 	public static class ExtensionFilter implements FilenameFilter {
-		
+
 		private final List<String> extensions;
-		
+
 		/**
 		 * Convenient constructor to initialize the valid file extensions from an array.
 		 * @param extensions - valid file extensions
@@ -119,7 +119,7 @@ public class ResourceLoadingUtils {
 		public ExtensionFilter(final @Nullable String[] extensions) {
 			this(asList(ofNullable(extensions).orElse(new String[]{})));			
 		}
-		
+
 		/**
 		 * Convenient constructor to initialize the valid file extensions from a list.
 		 * @param extensions - valid file extensions
@@ -129,14 +129,14 @@ public class ResourceLoadingUtils {
 					.map(e -> e != null ? e.trim().toLowerCase() : null)
 					.filter(Objects::nonNull).collect(Collectors.toList());
 		}
-		
+
 		@Override
 		public boolean accept(final File file, final String name) {
 			final String name2 = (name != null ? name.trim().toLowerCase() : null);
 			if (name2 == null) return false;
 			return extensions.stream().anyMatch(e -> name2.endsWith(e));
 		}
-		
+
 	}
 
 }

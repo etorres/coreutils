@@ -21,18 +21,18 @@
  * that you distribute must include a readable copy of the "NOTICE" text file.
  */
 
-package org.grycap.coreutils.fiber.http;
+package es.upv.grycap.coreutils.fiber.http;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableMap.of;
+import static es.upv.grycap.coreutils.fiber.net.UrlBuilder.getUrlBuilder;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import static java.util.Collections.synchronizedList;
 import static java.util.Objects.requireNonNull;
 import static java.util.Optional.ofNullable;
 import static org.apache.commons.lang3.StringUtils.removeEnd;
 import static org.apache.commons.lang3.StringUtils.trimToNull;
-import static org.grycap.coreutils.fiber.net.UrlBuilder.getUrlBuilder;
 import static org.slf4j.LoggerFactory.getLogger;
 
 import java.io.File;
@@ -66,12 +66,12 @@ import org.apache.http.message.BasicHttpRequest;
 import org.apache.http.nio.client.methods.ZeroCopyConsumer;
 import org.apache.http.nio.protocol.BasicAsyncRequestProducer;
 import org.apache.http.nio.protocol.HttpAsyncRequestProducer;
-import org.grycap.coreutils.fiber.net.UrlBuilder;
 import org.slf4j.Logger;
 
 import com.google.common.collect.Range;
 
 import co.paralleluniverse.fibers.httpasyncclient.FiberCloseableHttpAsyncClient;
+import es.upv.grycap.coreutils.fiber.net.UrlBuilder;
 
 /**
  * High-concurrency data fetcher. Note that this class will name fetched files using a convention-over-configuration pattern 

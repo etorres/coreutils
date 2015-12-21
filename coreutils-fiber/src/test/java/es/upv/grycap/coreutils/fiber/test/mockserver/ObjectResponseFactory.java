@@ -21,7 +21,7 @@
  * that you distribute must include a readable copy of the "NOTICE" text file.
  */
 
-package org.grycap.coreutils.fiber.test.mockserver;
+package es.upv.grycap.coreutils.fiber.test.mockserver;
 
 /**
  * Creates objects using standard data formats. Despite the format, all objects include a recognizable identifier in the

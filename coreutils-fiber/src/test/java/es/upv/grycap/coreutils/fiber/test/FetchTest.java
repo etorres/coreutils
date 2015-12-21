@@ -21,14 +21,14 @@
  * that you distribute must include a readable copy of the "NOTICE" text file.
  */
 
-package org.grycap.coreutils.fiber.test;
+package es.upv.grycap.coreutils.fiber.test;
 
+import static es.upv.grycap.coreutils.fiber.test.mockserver.FiberExpectationInitializer.MOCK_SERVER_BASE_URL;
+import static es.upv.grycap.coreutils.fiber.test.mockserver.ObjectResponseValidator.validateJson;
+import static es.upv.grycap.coreutils.fiber.test.mockserver.ObjectResponseValidator.validateXml;
 import static java.util.Collections.emptyList;
 import static org.apache.commons.collections.ListUtils.union;
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphanumeric;
-import static org.grycap.coreutils.fiber.test.mockserver.FiberExpectationInitializer.MOCK_SERVER_BASE_URL;
-import static org.grycap.coreutils.fiber.test.mockserver.ObjectResponseValidator.validateJson;
-import static org.grycap.coreutils.fiber.test.mockserver.ObjectResponseValidator.validateXml;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItem;
@@ -46,12 +46,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import org.grycap.coreutils.fiber.http.HttpDataFetcher;
-import org.grycap.coreutils.fiber.http.HttpDataFetcher.FecthFuture;
-import org.grycap.coreutils.fiber.http.HttpDataFetcher.FetchStatus;
-import org.grycap.coreutils.test.category.IntegrationTests;
-import org.grycap.coreutils.test.rules.TestPrinter;
-import org.grycap.coreutils.test.rules.TestWatcher2;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -65,6 +59,12 @@ import org.junit.runners.Parameterized.Parameters;
 import com.google.common.collect.ImmutableList;
 
 import co.paralleluniverse.fibers.futures.AsyncCompletionStage;
+import es.upv.grycap.coreutils.fiber.http.HttpDataFetcher;
+import es.upv.grycap.coreutils.fiber.http.HttpDataFetcher.FecthFuture;
+import es.upv.grycap.coreutils.fiber.http.HttpDataFetcher.FetchStatus;
+import es.upv.grycap.coreutils.test.category.IntegrationTests;
+import es.upv.grycap.coreutils.test.rules.TestPrinter;
+import es.upv.grycap.coreutils.test.rules.TestWatcher2;
 
 /**
  * Tests data fetching.

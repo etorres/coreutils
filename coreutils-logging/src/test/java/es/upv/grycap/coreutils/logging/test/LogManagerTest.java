@@ -21,10 +21,10 @@
  * that you distribute must include a readable copy of the "NOTICE" text file.
  */
 
-package org.grycap.coreutils.logging.test;
+package es.upv.grycap.coreutils.logging.test;
 
+import static es.upv.grycap.coreutils.logging.LogManager.getLogManager;
 import static org.apache.commons.io.FileUtils.deleteQuietly;
-import static org.grycap.coreutils.logging.LogManager.getLogManager;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -33,9 +33,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import org.grycap.coreutils.test.category.FunctionalTests;
-import org.grycap.coreutils.test.rules.TestPrinter;
-import org.grycap.coreutils.test.rules.TestWatcher2;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Rule;
@@ -46,6 +43,9 @@ import org.slf4j.Logger;
 
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.core.util.StatusPrinter;
+import es.upv.grycap.coreutils.test.category.FunctionalTests;
+import es.upv.grycap.coreutils.test.rules.TestPrinter;
+import es.upv.grycap.coreutils.test.rules.TestWatcher2;
 
 /**
  * Tests the log manager.
@@ -77,7 +77,7 @@ public class LogManagerTest {
 	@Test
 	public void testFactory() throws Exception {
 		// setup logging via the factory method that internally calls the initialization method
-		final Logger logger = org.grycap.coreutils.logging.ExtendedLoggerFactory.getLogger(DummyClass.class);
+		final Logger logger = es.upv.grycap.coreutils.logging.ExtendedLoggerFactory.getLogger(DummyClass.class);
 		assertThat("Logger is not null", logger, notNullValue());
 
 		// j.u.l. logger

@@ -21,7 +21,7 @@
  * that you distribute must include a readable copy of the "NOTICE" text file.
  */
 
-package org.grycap.coreutils.test.category;
+package es.upv.grycap.coreutils.test.category;
 
 /**
  * Categorize unit tests that belongs to the sanity testing group.

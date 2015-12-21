@@ -21,7 +21,7 @@
  * that you distribute must include a readable copy of the "NOTICE" text file.
  */
 
-package org.grycap.coreutils.common;
+package es.upv.grycap.coreutils.common;
 
 import static org.apache.commons.lang3.StringUtils.trimToNull;
 

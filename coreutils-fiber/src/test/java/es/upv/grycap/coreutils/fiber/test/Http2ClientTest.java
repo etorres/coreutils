@@ -21,15 +21,15 @@
  * that you distribute must include a readable copy of the "NOTICE" text file.
  */
 
-package org.grycap.coreutils.fiber.test;
+package es.upv.grycap.coreutils.fiber.test;
 
 import static com.google.common.collect.ImmutableList.of;
 import static com.google.common.collect.Lists.newArrayList;
+import static es.upv.grycap.coreutils.fiber.http.Http2Client.getHttp2Client;
+import static es.upv.grycap.coreutils.fiber.test.mockserver.FiberExpectationInitializer.MOCK_SERVER_BASE_URL;
+import static es.upv.grycap.coreutils.fiber.test.mockserver.ObjectResponseValidator.isValidJson;
+import static es.upv.grycap.coreutils.fiber.test.mockserver.ObjectResponseValidator.isValidXml;
 import static java.util.Optional.ofNullable;
-import static org.grycap.coreutils.fiber.http.Http2Client.getHttp2Client;
-import static org.grycap.coreutils.fiber.test.mockserver.FiberExpectationInitializer.MOCK_SERVER_BASE_URL;
-import static org.grycap.coreutils.fiber.test.mockserver.ObjectResponseValidator.isValidJson;
-import static org.grycap.coreutils.fiber.test.mockserver.ObjectResponseValidator.isValidXml;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.not;
@@ -43,10 +43,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
-import org.grycap.coreutils.fiber.http.Http2Client;
-import org.grycap.coreutils.test.category.IntegrationTests;
-import org.grycap.coreutils.test.rules.TestPrinter;
-import org.grycap.coreutils.test.rules.TestWatcher2;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -60,6 +56,10 @@ import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
+import es.upv.grycap.coreutils.fiber.http.Http2Client;
+import es.upv.grycap.coreutils.test.category.IntegrationTests;
+import es.upv.grycap.coreutils.test.rules.TestPrinter;
+import es.upv.grycap.coreutils.test.rules.TestWatcher2;
 import net.jodah.concurrentunit.Waiter;
 
 /**

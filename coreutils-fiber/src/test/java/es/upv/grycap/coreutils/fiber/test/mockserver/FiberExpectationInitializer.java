@@ -21,14 +21,14 @@
  * that you distribute must include a readable copy of the "NOTICE" text file.
  */
 
-package org.grycap.coreutils.fiber.test.mockserver;
+package es.upv.grycap.coreutils.fiber.test.mockserver;
 
 import static com.google.common.collect.ImmutableMap.of;
+import static es.upv.grycap.coreutils.fiber.test.mockserver.ObjectResponseFactory.jsonObject1;
+import static es.upv.grycap.coreutils.fiber.test.mockserver.ObjectResponseFactory.jsonObject2;
+import static es.upv.grycap.coreutils.fiber.test.mockserver.ObjectResponseFactory.xmlObject1;
+import static es.upv.grycap.coreutils.fiber.test.mockserver.ObjectResponseFactory.xmlObject2;
 import static java.util.Collections.emptyMap;
-import static org.grycap.coreutils.fiber.test.mockserver.ObjectResponseFactory.jsonObject1;
-import static org.grycap.coreutils.fiber.test.mockserver.ObjectResponseFactory.jsonObject2;
-import static org.grycap.coreutils.fiber.test.mockserver.ObjectResponseFactory.xmlObject1;
-import static org.grycap.coreutils.fiber.test.mockserver.ObjectResponseFactory.xmlObject2;
 import static org.mockserver.matchers.Times.exactly;
 import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.HttpResponse.response;

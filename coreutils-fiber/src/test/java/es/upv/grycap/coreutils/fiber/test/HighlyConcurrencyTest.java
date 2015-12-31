@@ -24,7 +24,8 @@
 package es.upv.grycap.coreutils.fiber.test;
 
 import static com.google.common.collect.ImmutableList.of;
-import static es.upv.grycap.coreutils.fiber.http.Http2Client.getHttp2Client;
+import static es.upv.grycap.coreutils.fiber.http.Http2Clients.http2Client;
+import static es.upv.grycap.coreutils.fiber.http.Http2Clients.isolatedHttp2Client;
 import static es.upv.grycap.coreutils.fiber.test.mockserver.FiberExpectationInitializer.MOCK_SERVER_BASE_URL;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -64,11 +65,20 @@ public class HighlyConcurrencyTest {
 	public TestRule watchman = new TestWatcher2(pw);
 
 	@Test
-	public void test() throws Exception {
-		// create the client
-		final Http2Client client = getHttp2Client();
-		assertThat("HTTP+SPDY client was created", client, notNullValue());
+	public void testManagedClient() throws Exception {
+		final Http2Client client = http2Client();
+		assertThat("HTTP+SPDY managed client was created", client, notNullValue());
+		runTest(client);
+	}
 
+	@Test
+	public void testIsolatedClient() throws Exception {
+		final Http2Client client = isolatedHttp2Client();
+		assertThat("HTTP+SPDY isolated client was created", client, notNullValue());
+		runTest(client);		
+	}
+
+	private void runTest(final Http2Client client) throws Exception {
 		// prepare the test
 		final Waiter waiter = new Waiter();
 		for (int i = 0; i < 100; i++) {
@@ -88,5 +98,5 @@ public class HighlyConcurrencyTest {
 			});
 		}
 		waiter.await(30l, TimeUnit.SECONDS, 100);
-	}	
+	}
 }

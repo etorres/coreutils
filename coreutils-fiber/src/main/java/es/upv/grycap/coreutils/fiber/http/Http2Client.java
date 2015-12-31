@@ -24,30 +24,19 @@
 package es.upv.grycap.coreutils.fiber.http;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static java.nio.file.Files.createTempDirectory;
-import static java.nio.file.attribute.PosixFilePermissions.asFileAttribute;
-import static java.nio.file.attribute.PosixFilePermissions.fromString;
 import static java.util.Collections.emptyList;
 import static java.util.Objects.requireNonNull;
 import static java.util.Optional.ofNullable;
 import static org.apache.commons.lang3.StringUtils.trimToNull;
-import static org.slf4j.LoggerFactory.getLogger;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Supplier;
 
 import javax.annotation.Nullable;
 
-import org.apache.commons.io.FileUtils;
-import org.slf4j.Logger;
-
-import com.squareup.okhttp.Cache;
 import com.squareup.okhttp.CacheControl;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.MediaType;
@@ -55,7 +44,6 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 
-import co.paralleluniverse.fibers.okhttp.FiberOkHttpClient;
 import okio.BufferedSink;
 
 /**
@@ -63,49 +51,16 @@ import okio.BufferedSink;
  * @author Erik Torres <etserrano@gmail.com>
  * @since 0.1.0
  */
-public class Http2Client {
+public final class Http2Client {
 
-	private static final Logger LOGGER = getLogger(Http2Client.class);
-
-	private static final int CACHE_SIZE_MIB = 32 * 1024 * 1024; // 32 MiB
-
-	private static OkHttpClient __client = null;
-
-	private Lock mutex = new ReentrantLock();
-
-	public static Http2Client getHttp2Client() {
-		return new Http2Client();
-	}
+	private final OkHttpClient client;
 
 	/**
-	 * Creates a {@link OkHttpClient} instance and configures it with a cache. The same instance is used across the application to
-	 * benefit from a common cache storage and to prevent cache corruption. The cache directory is created private to the user who
-	 * runs the application and its content is deleted when the JVM starts its shutting down sequence.
-	 * @return A {@link OkHttpClient} instance that can be used everywhere in the application.
+	 * Access to this constructor is restricted to the classes in the same package. A factory method should be used to 
+	 * create new instances of this class.
 	 */
-	private OkHttpClient client() {
-		mutex.lock();
-		try {
-			if (__client == null) {
-				__client = new FiberOkHttpClient();
-				try {
-					final File cacheDir = createTempDirectory("coreutils-okhttp-cache-", asFileAttribute(fromString("rwx------"))).toFile();
-					Runtime.getRuntime().addShutdownHook(new Thread() {
-						@Override
-						public void run() {
-							FileUtils.deleteQuietly(cacheDir);
-						}
-					});
-					final Cache cache = new Cache(cacheDir, CACHE_SIZE_MIB);					
-					__client.setCache(cache);
-				} catch (IOException e) {
-					LOGGER.error("Failed to create directory cache", e);
-				}
-			}
-			return __client;
-		} finally {
-			mutex.unlock();
-		}
+	Http2Client(final OkHttpClient client) {
+		this.client = requireNonNull(client, "A valid HTTP2 client expected");
 	}
 
 	/**
@@ -146,7 +101,7 @@ public class Http2Client {
 		final Request.Builder requestBuilder = new Request.Builder().cacheControl(cacheControlBuilder.build()).url(url2);
 		ofNullable(acceptableMediaTypes).orElse(emptyList()).stream().filter(Objects::nonNull).forEach(type -> requestBuilder.addHeader("Accept", type));
 		// submit request
-		client().newCall(requestBuilder.build()).enqueue(callback);
+		client.newCall(requestBuilder.build()).enqueue(callback);
 	}
 
 	/**
@@ -185,7 +140,7 @@ public class Http2Client {
 			}
 		}).build();
 		// submit request
-		client().newCall(request).enqueue(callback);
+		client.newCall(request).enqueue(callback);
 	}
 
 	/**
@@ -224,7 +179,7 @@ public class Http2Client {
 			}
 		}).build();
 		// submit request
-		client().newCall(request).enqueue(callback);
+		client.newCall(request).enqueue(callback);
 	}
 
 	/**
@@ -238,7 +193,7 @@ public class Http2Client {
 		// prepare request
 		final Request request = new Request.Builder().url(url2).delete().build();
 		// submit request
-		client().newCall(request).enqueue(callback);
+		client.newCall(request).enqueue(callback);
 	}
 
 }

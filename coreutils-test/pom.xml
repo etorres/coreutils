@@ -28,7 +28,7 @@ that you distribute must include a readable copy of the "NOTICE" text file.
 	<parent>
 		<groupId>es.upv.grycap.coreutils</groupId>
 		<artifactId>coreutils</artifactId>
-		<version>0.1.0</version>
+		<version>0.2.0</version>
 	</parent>
 	
 	<artifactId>coreutils-test</artifactId>

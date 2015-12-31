@@ -1,5 +1,5 @@
 /*
- * Core Utils - Testing utilities.
+ * Core Utils - Common Utilities.
  * Copyright 2015-2016 GRyCAP (Universitat Politecnica de Valencia)
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,11 +21,33 @@
  * that you distribute must include a readable copy of the "NOTICE" text file.
  */
 
-package es.upv.grycap.coreutils.test.category;
+package es.upv.grycap.coreutils.common;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
- * Categorize tests that belongs to the integration testing group.
+ * Shutdown listener.
  * @author Erik Torres <etserrano@gmail.com>
- * @since 0.1.0
+ * @since 0.2.0
  */
-public interface IntegrationTests { }
+public abstract class ShutdownListener {
+
+	/**
+	 * Maintains the status of the instance.
+	 */
+	protected final AtomicBoolean isRunning = new AtomicBoolean(false);	
+	
+	/**
+	 * Sets the value of {@link #isRunning} to <tt>true</tt>.
+	 */
+	public void init() {
+		isRunning.compareAndSet(false, true);
+	}
+	
+	/**
+	 * Calling this method should set the value of {@link #isRunning} to <tt>false</tt>. Implementations should check that the value is
+	 * <tt>true</tt> before entering the stop sequence.
+	 */
+	public abstract void stop();
+	
+}

@@ -25,7 +25,7 @@ package es.upv.grycap.coreutils.fiber.test;
 
 import static com.google.common.collect.ImmutableList.of;
 import static com.google.common.collect.Lists.newArrayList;
-import static es.upv.grycap.coreutils.fiber.http.Http2Client.getHttp2Client;
+import static es.upv.grycap.coreutils.fiber.http.Http2Clients.http2Client;
 import static es.upv.grycap.coreutils.fiber.test.mockserver.FiberExpectationInitializer.MOCK_SERVER_BASE_URL;
 import static es.upv.grycap.coreutils.fiber.test.mockserver.ObjectResponseValidator.isValidJson;
 import static es.upv.grycap.coreutils.fiber.test.mockserver.ObjectResponseValidator.isValidXml;
@@ -115,7 +115,7 @@ public class Http2ClientTest {
 	@Test
 	public void test() throws Exception {
 		// create the client
-		final Http2Client client = getHttp2Client();
+		final Http2Client client = http2Client();
 		assertThat("HTTP+SPDY client was created", client, notNullValue());
 
 		// prepare the test

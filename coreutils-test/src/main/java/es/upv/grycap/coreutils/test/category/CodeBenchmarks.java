@@ -24,8 +24,8 @@
 package es.upv.grycap.coreutils.test.category;
 
 /**
- * Categorize tests that belongs to the integration testing group.
+ * Categorize tests that are intended to evaluate the performance of the application code.
  * @author Erik Torres <etserrano@gmail.com>
  * @since 0.1.0
  */
-public interface IntegrationTests { }
+public class CodeBenchmarks { }

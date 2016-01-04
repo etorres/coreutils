@@ -21,8 +21,9 @@
  * that you distribute must include a readable copy of the "NOTICE" text file.
  */
 
-package es.upv.grycap.coreutils.common;
+package es.upv.grycap.coreutils.common.config;
 
+import static es.upv.grycap.coreutils.common.CoreutilsContext.COREUTILS_CONTEXT;
 import static org.apache.commons.lang3.StringUtils.trimToNull;
 
 import java.io.File;
@@ -62,6 +63,20 @@ public class Configurer {
 		}
 		// validate
 		config.checkValid(ConfigFactory.defaultReference(), rootPath);
+		return config;
+	}
+
+	/**
+	 * Loads and merges application configuration with default properties.
+	 * @param confname - optional configuration filename
+	 * @param rootPath - only load configuration properties underneath this path that this code
+	 *                   module owns and understands
+	 * @param reset - set to <tt>true</tt> will send a notification to all the components subscribed to the {@link ConfigurationChangedEvent}
+	 * @return Configuration loaded from the provided filename or from default properties.
+	 */
+	public Config loadConfig(final @Nullable String confname, final String rootPath, final boolean reset) {
+		final Config config = loadConfig(confname, rootPath);
+		if (reset) COREUTILS_CONTEXT.eventBus().post(new ConfigurationChangedEvent(config));
 		return config;
 	}
 

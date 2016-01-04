@@ -51,6 +51,12 @@ that you distribute must include a readable copy of the "NOTICE" text file.
 			<artifactId>jsr305</artifactId>
 		</dependency>
 		
+		<!-- Google Guava core libraries for Java -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+		</dependency>
+		
 		<!-- Apache Commons -->
 		<dependency> <!-- Utility classes for the classes that are considered to be Java standards -->
 			<groupId>org.apache.commons</groupId>
@@ -66,5 +72,17 @@ that you distribute must include a readable copy of the "NOTICE" text file.
 			<groupId>com.typesafe</groupId>
 			<artifactId>config</artifactId>
 		</dependency>
-	</dependencies>	
+		
+		<!-- SLF4J logging framework -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency> <!-- SLF4J Simple binding -->
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 </project>

@@ -23,27 +23,20 @@
 
 package es.upv.grycap.coreutils.common;
 
+import com.google.common.collect.Range;
+
 /**
- * Shutdown listener.
+ * Hard-coded configuration limits.
  * @author Erik Torres <etserrano@gmail.com>
  * @since 0.2.0
  */
-public interface ShutdownListener {
-	
-	/**
-	 * Gets the status of the listener. Implementations should check that the value returned by this method is <tt>true</tt> before entering the stop sequence.
-	 * @return
-	 */
-	boolean isRunning();
+public interface CoreutilsLimits {
 
-	/**
-	 * Calling this method should set the value of {@link #isRunning()} to <tt>true</tt> before of after executing the initialization routine.
-	 */
-	void init();
-	
-	/**
-	 * Calling this method should set the value of {@link #isRunning()} to <tt>false</tt> before entering the stop sequence.
-	 */
-	void stop();
-	
+	public static final int NUM_AVAILABLE_PROCESSORS = Runtime.getRuntime().availableProcessors();
+
+	public static final Range<Long> TRY_LOCK_TIMEOUT_RANGE = Range.closed(1l, 2000l);
+	public static final Range<Integer> MAX_POOL_SIZE_RANGE = Range.closed(Math.min(2, NUM_AVAILABLE_PROCESSORS), Math.max(128, NUM_AVAILABLE_PROCESSORS));
+	public static final Range<Long> KEEP_ALIVE_TIME_RANGE = Range.closed(60000l, 3600000l);
+	public static final Range<Long> WAIT_TERMINATION_TIMEOUT_RANGE = Range.closed(1000l, 60000l);
+
 }

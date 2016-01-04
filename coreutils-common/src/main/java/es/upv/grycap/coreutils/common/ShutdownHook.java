@@ -23,13 +23,13 @@
 
 package es.upv.grycap.coreutils.common;
 
-import static java.util.Collections.synchronizedMap;
+import static es.upv.grycap.coreutils.common.CoreutilsLimits.WAIT_TERMINATION_TIMEOUT_RANGE;
 import static java.util.Objects.requireNonNull;
 import static java.util.concurrent.Executors.newSingleThreadExecutor;
-import static java.util.concurrent.TimeUnit.SECONDS;
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.Deque;
+import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.ExecutorService;
 
 import javax.annotation.concurrent.ThreadSafe;
@@ -43,37 +43,36 @@ import javax.annotation.concurrent.ThreadSafe;
 @ThreadSafe
 public class ShutdownHook {	
 
-	private final int TIMEOUT_SECS = 8;
 	private final Thread hook;
 
 	/**
-	 * Thread-safe map that preserves the insertion order of the entries.
+	 * Thread-safe LIFO stack that preserves the insertion order of the entries.
 	 */
-	private final Map<String, ShutdownListener> listeners = synchronizedMap(new LinkedHashMap<String, ShutdownListener>());
+	private final Deque<ShutdownListener> listeners = new ConcurrentLinkedDeque<ShutdownListener>();
 
 	/**
 	 * Creates an instance of this class and registers it with the JVM.
 	 */
-	public ShutdownHook() {
+	public ShutdownHook(final long waitTerminationTimeout) {
+		final long waitTerminationTimeout2 = WAIT_TERMINATION_TIMEOUT_RANGE.contains(waitTerminationTimeout) ? waitTerminationTimeout 
+				: WAIT_TERMINATION_TIMEOUT_RANGE.lowerEndpoint();
 		hook = new Thread() {
 			@Override
 			public void run() {
 				final ExecutorService executor = newSingleThreadExecutor();				
-				for (final Map.Entry<String, ShutdownListener> entry : listeners.entrySet()) {
-					final ShutdownListener listener = entry.getValue();
-					if (listener != null) {
-						executor.execute(new Runnable() {							
-							@Override
-							public void run() {
-								try {
-									listener.stop();
-								} catch (Exception ignore) { }
-							}
-						});						
-					}					
+				while (!listeners.isEmpty()) {
+					final ShutdownListener listener = listeners.pop();
+					executor.execute(new Runnable() {							
+						@Override
+						public void run() {
+							try {
+								listener.stop();
+							} catch (Exception ignore) { }
+						}
+					});						
 				}
 				try {
-					if (!executor.awaitTermination(TIMEOUT_SECS, SECONDS)) {
+					if (!executor.awaitTermination(waitTerminationTimeout2, MILLISECONDS)) {
 						executor.shutdown();
 					}
 				} catch (Exception e) {
@@ -93,9 +92,11 @@ public class ShutdownHook {
 	 * @param listener - the listener that will be added to the shutdown sequence
 	 */
 	public void register(final ShutdownListener listener) {
-		requireNonNull(listener, "A non-null listener expected");
-		final String name = listener.getClass().getCanonicalName();
-		listeners.put(name, listener);
+		listeners.push(requireNonNull(listener, "A non-null listener expected"));
+	}
+
+	public void deregister(final ShutdownListener listener) {
+		listeners.remove(listener);
 	}
 
 	/**

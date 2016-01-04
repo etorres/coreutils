@@ -23,7 +23,8 @@
 
 package es.upv.grycap.coreutils.common;
 
-import static java.util.Collections.emptyMap;
+import static com.google.common.base.Preconditions.checkState;
+import static es.upv.grycap.coreutils.common.CoreutilsLimits.TRY_LOCK_TIMEOUT_RANGE;
 import static java.util.Objects.requireNonNull;
 import static java.util.Optional.ofNullable;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
@@ -38,6 +39,14 @@ import java.util.function.Supplier;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.ThreadSafe;
 
+import com.google.common.eventbus.Subscribe;
+import com.typesafe.config.Config;
+
+import es.upv.grycap.coreutils.common.concurrent.TaskRunner;
+import es.upv.grycap.coreutils.common.config.ConfigurationChangedEvent;
+import es.upv.grycap.coreutils.common.config.Configurer;
+import es.upv.grycap.coreutils.common.events.CoreUtilsEventBus;
+
 /**
  * Lightweight and unopinionated central class for providing configuration information to a coreutils-powered application.
  * @author Erik Torres <etserrano@gmail.com>
@@ -46,13 +55,63 @@ import javax.annotation.concurrent.ThreadSafe;
 @ThreadSafe
 public enum CoreutilsContext {
 
-	COREUTILS_CONTEXT;
-
-	private static final long TIMEOUT_MILLISECS = 2000l;
+	COREUTILS_CONTEXT;	
 
 	private final Map<ContextKey, Map<String, Object>> registry = new EnumMap<>(ContextKey.class);
 	private final Lock mutex = new ReentrantLock();
 	private final BooleanReference register = new BooleanReference(false);
+
+	private final TaskRunner fastTaskRunner;
+	private final CoreUtilsEventBus eventBus;
+	private final ShutdownHook shutdownHook;
+
+	private long tryLockTimeout = TRY_LOCK_TIMEOUT_RANGE.upperEndpoint();
+
+	private CoreutilsContext() {
+		// load default configuration
+		final Config config = new Configurer().loadConfig(null, "coreutils");
+		loadContextConfig(config);
+		// configure and initialize core components
+		shutdownHook = new ShutdownHook(config.getDuration("coreutils.shutdown-hook.wait-termination-timeout", MILLISECONDS));
+		fastTaskRunner = new TaskRunner(config.getInt("coreutils.task-runner.min-pool-size"), 
+				config.getDuration("coreutils.task-runner.keep-alive-time", MILLISECONDS),
+				config.getDuration("coreutils.task-runner.wait-termination-timeout", MILLISECONDS));
+		addShutdownListener(fastTaskRunner, TaskRunner.class);
+		eventBus = new CoreUtilsEventBus(fastTaskRunner.executorService());
+		// register with the event bus to receive notifications
+		eventBus.register(this);
+	}
+
+	private void loadContextConfig(final Config config) {
+		try {
+			mutex.tryLock(tryLockTimeout, MILLISECONDS);
+			try {
+				final long tmp = config.getDuration("coreutils.context.try-lock-timeout", MILLISECONDS);
+				tryLockTimeout = TRY_LOCK_TIMEOUT_RANGE.contains(tmp) ? tmp : TRY_LOCK_TIMEOUT_RANGE.upperEndpoint();
+			} finally {
+				mutex.unlock();
+			}
+		} catch (InterruptedException e) {
+			throw new IllegalStateException("Reconfiguration interrupted");
+		}
+	}
+
+	/**
+	 * Tracks configuration changes and applies the new configuration to the context.
+	 * @param event - the event with the new configuration
+	 */
+	@Subscribe
+	public void recordConfigurationChange(final ConfigurationChangedEvent event) {
+		loadContextConfig(requireNonNull(requireNonNull(event, "A non-null event expected").getConfig(), "A non-null configuration expected"));
+	}
+
+	/**
+	 * Gets the event bus.
+	 * @return the event bus
+	 */
+	public CoreUtilsEventBus eventBus() {
+		return eventBus;
+	}
 
 	/**
 	 * Gets a client from the registry.
@@ -121,10 +180,8 @@ public enum CoreutilsContext {
 	 */
 	public <T extends ShutdownListener> void addShutdownListener(final T listener, final Class<T> type, final @Nullable String classifier) {
 		requireNonNull(listener, "A non-null listener expected");
-		final ShutdownListener listener2 = get(ContextKey.SHUTDOWN_LISTENERS, type, classifier, () -> listener);
-		if (listener != listener2) {
-			throw new IllegalStateException("A previous shutdown listener was registered, try with a different classifier");
-		}
+		final ShutdownListener listener2 = get(ContextKey.SHUTDOWN_LISTENERS, type, classifier, () -> listener);		
+		checkState(listener == listener2, "A previous shutdown listener was registered, try with a different classifier");
 	}
 
 	/**
@@ -145,11 +202,10 @@ public enum CoreutilsContext {
 	}
 
 	@Nullable
-	@SuppressWarnings("unchecked")
 	private <T> T get(final ContextKey key, final Class<T> type, final @Nullable String classifier, final @Nullable Supplier<T> supplier) {
 		requireNonNull(type, "A non-null type expected");
 		try {
-			mutex.tryLock(TIMEOUT_MILLISECS, MILLISECONDS);
+			mutex.tryLock(tryLockTimeout, MILLISECONDS);
 			try {
 				// lazy initialization of the registry
 				register.set(false);
@@ -161,12 +217,18 @@ public enum CoreutilsContext {
 				// get or create the instance
 				register.set(false);
 				final String instanceKey = instanceKey(type, classifier);
+				@SuppressWarnings("unchecked")
 				final T instance = (T)ofNullable(map.get(instanceKey)).orElseGet(() -> {
 					final T tmp = ofNullable(supplier).orElse(() -> null).get();
 					if (tmp != null) register.set(true);
 					return tmp;
 				});
-				if (register.get()) map.put(instanceKey, instance);
+				if (register.get()) {
+					map.put(instanceKey, instance);
+					if (ContextKey.SHUTDOWN_LISTENERS == key) {
+						shutdownHook.register((ShutdownListener)instance);
+					}
+				}
 				return instance;
 			} finally {
 				mutex.unlock();
@@ -179,9 +241,22 @@ public enum CoreutilsContext {
 	private <T> void remove(final ContextKey key, final Class<T> type, final @Nullable String classifier) {
 		requireNonNull(type, "A non-null type expected");
 		try {
-			mutex.tryLock(TIMEOUT_MILLISECS, MILLISECONDS);
+			mutex.tryLock(tryLockTimeout, MILLISECONDS);
 			try {
-				ofNullable(registry.get(key)).orElse(emptyMap()).remove(instanceKey(type, classifier));
+				// lazy initialization of the registry
+				final Map<String, Object> map = ofNullable(registry.get(key)).orElseGet(() -> {
+					register.set(true);
+					return new HashMap<>(1);
+				});
+				// remove the instance
+				@SuppressWarnings("unchecked")
+				final T instance = (T)map.get(instanceKey(type, classifier));
+				if (instance != null) {
+					map.remove(instance);
+					if (ContextKey.SHUTDOWN_LISTENERS == key) {
+						shutdownHook.deregister((ShutdownListener)instance);
+					}
+				}
 			} finally {
 				mutex.unlock();
 			}

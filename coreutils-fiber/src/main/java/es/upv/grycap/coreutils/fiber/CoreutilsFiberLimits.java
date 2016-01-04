@@ -1,5 +1,5 @@
 /*
- * Core Utils - Common Utilities.
+ * Core Utils - Fiber-enabled clients.
  * Copyright 2015-2016 GRyCAP (Universitat Politecnica de Valencia)
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,29 +21,19 @@
  * that you distribute must include a readable copy of the "NOTICE" text file.
  */
 
-package es.upv.grycap.coreutils.common;
+package es.upv.grycap.coreutils.fiber;
+
+import com.google.common.collect.Range;
+
+import es.upv.grycap.coreutils.common.CoreutilsLimits;
 
 /**
- * Shutdown listener.
+ * Extends limits for this component.
  * @author Erik Torres <etserrano@gmail.com>
  * @since 0.2.0
  */
-public interface ShutdownListener {
-	
-	/**
-	 * Gets the status of the listener. Implementations should check that the value returned by this method is <tt>true</tt> before entering the stop sequence.
-	 * @return
-	 */
-	boolean isRunning();
+public interface CoreutilsFiberLimits extends CoreutilsLimits {
 
-	/**
-	 * Calling this method should set the value of {@link #isRunning()} to <tt>true</tt> before of after executing the initialization routine.
-	 */
-	void init();
-	
-	/**
-	 * Calling this method should set the value of {@link #isRunning()} to <tt>false</tt> before entering the stop sequence.
-	 */
-	void stop();
+	public static final Range<Long> CACHE_SIZE_RANGE = Range.closed(1l * 1024 * 1024, 2l * 1024 * 1024 * 1024); // 1MiB-2GiB
 	
 }

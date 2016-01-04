@@ -41,7 +41,7 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.rules.TestRule;
 
-import es.upv.grycap.coreutils.common.ShutdownListener;
+import es.upv.grycap.coreutils.common.BaseShutdownListener;
 import es.upv.grycap.coreutils.test.category.FunctionalTests;
 import es.upv.grycap.coreutils.test.rules.TestPrinter;
 import es.upv.grycap.coreutils.test.rules.TestWatcher2;
@@ -59,12 +59,12 @@ public class CoreutilsContextTest {
 
 	@Rule
 	public TestRule watchman = new TestWatcher2(pw);
-	
+
 	@BeforeClass
 	public static void setup() {
 		COREUTILS_CONTEXT.addShutdownListener(new FakeShutdownListener(), FakeShutdownListener.class, "duplicate");
 	}
-	
+
 	@AfterClass
 	public static void cleanup() {
 		COREUTILS_CONTEXT.removeShutdownListener(FakeShutdownListener.class, "duplicate");
@@ -83,13 +83,13 @@ public class CoreutilsContextTest {
 		client2 = COREUTILS_CONTEXT.getClient(FakeClient.class, "classifier", FakeClient::new);
 		assertThat("Client coincides with expected", client2, allOf(notNullValue(), not(equalTo(client))));
 	}
-	
+
 	@Test
 	public void testShutdownhook() throws Exception {
 		COREUTILS_CONTEXT.addShutdownListener(new FakeShutdownListener(), FakeShutdownListener.class);		
 		COREUTILS_CONTEXT.removeShutdownListener(FakeShutdownListener.class);
 	}
-	
+
 	@Test(expected=IllegalStateException.class) 
 	public void testDuplicateShutdownhook() {
 		COREUTILS_CONTEXT.addShutdownListener(new FakeShutdownListener(), FakeShutdownListener.class, "duplicate");
@@ -123,19 +123,12 @@ public class CoreutilsContextTest {
 		}
 
 	}
-	
+
 	/**
 	 * Shutdown listener mock-up.
 	 * @author Erik Torres <etserrano@gmail.com>
 	 * @since 0.2.0
 	 */
-	public static class FakeShutdownListener extends ShutdownListener {
-
-		@Override
-		public void stop() {
-			if (isRunning.get());
-		}
-		
-	}
+	public static class FakeShutdownListener extends BaseShutdownListener { }
 
 }

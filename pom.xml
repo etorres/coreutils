@@ -114,7 +114,14 @@ that you distribute must include a readable copy of the "NOTICE" text file.
 				<groupId>com.google.code.findbugs</groupId>
 				<artifactId>jsr305</artifactId>
 				<version>3.0.1</version>
-			</dependency>			
+			</dependency>
+			
+			<!-- Google Guava core libraries for Java -->
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>19.0</version>
+			</dependency>
 			
 			<!-- Google Gson library -->
 			<dependency>
@@ -161,7 +168,12 @@ that you distribute must include a readable copy of the "NOTICE" text file.
 				</exclusions>
 			</dependency>
 			
-			<!-- SLF4J logging framework -->			
+			<!-- SLF4J logging framework -->
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${org.slf4j.version}</version>
+			</dependency>
 			<dependency> <!-- java.util.logging (jul) bridge -->
 				<groupId>org.slf4j</groupId>
 				<artifactId>jul-to-slf4j</artifactId>
@@ -170,6 +182,11 @@ that you distribute must include a readable copy of the "NOTICE" text file.
 			<dependency> <!-- Log4j implemented over SLF4J -->
 				<groupId>org.slf4j</groupId>
 				<artifactId>log4j-over-slf4j</artifactId>
+				<version>${org.slf4j.version}</version>
+			</dependency>
+			<dependency> <!-- SLF4J Simple binding -->
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-simple</artifactId>
 				<version>${org.slf4j.version}</version>
 			</dependency>
 			

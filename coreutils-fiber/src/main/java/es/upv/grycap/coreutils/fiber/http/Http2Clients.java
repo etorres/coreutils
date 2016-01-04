@@ -24,6 +24,7 @@
 package es.upv.grycap.coreutils.fiber.http;
 
 import static es.upv.grycap.coreutils.common.CoreutilsContext.COREUTILS_CONTEXT;
+import static es.upv.grycap.coreutils.fiber.CoreutilsFiberLimits.CACHE_SIZE_RANGE;
 import static java.nio.file.Files.createTempDirectory;
 import static java.nio.file.attribute.PosixFilePermissions.asFileAttribute;
 import static java.nio.file.attribute.PosixFilePermissions.fromString;
@@ -37,9 +38,11 @@ import org.slf4j.Logger;
 
 import com.squareup.okhttp.Cache;
 import com.squareup.okhttp.OkHttpClient;
+import com.typesafe.config.Config;
 
 import co.paralleluniverse.fibers.okhttp.FiberOkHttpClient;
-import es.upv.grycap.coreutils.common.ShutdownListener;
+import es.upv.grycap.coreutils.common.BaseShutdownListener;
+import es.upv.grycap.coreutils.common.config.Configurer;
 
 /**
  * Factory class that creates new {@link Http2Client} instances.
@@ -49,8 +52,6 @@ import es.upv.grycap.coreutils.common.ShutdownListener;
 public final class Http2Clients {
 
 	private static final Logger LOGGER = getLogger(Http2Clients.class);
-
-	private static final int CACHE_SIZE_MIB = 32 * 1024 * 1024; // 32 MiB
 
 	/**
 	 * Gets a HTTP2 client which is expected to integrate with other tasks managed by coreutils.
@@ -79,10 +80,15 @@ public final class Http2Clients {
 		return COREUTILS_CONTEXT.getClient(OkHttpClient.class, "coreutils-fiber", () -> {
 			final OkHttpClient client = new FiberOkHttpClient();
 			try {
+				// load default configuration
+				final Config config = new Configurer().loadConfig(null, "coreutils");
+				final long tmp = config.getBytes("coreutils.clients.http2.cache-size");
+				final long cacheSize = CACHE_SIZE_RANGE.contains(tmp) ? tmp : CACHE_SIZE_RANGE.lowerEndpoint();
+				// create the cache directory				
 				final File cacheDir = createTempDirectory("coreutils-okhttp-cache-", asFileAttribute(fromString("rwx------"))).toFile();
 				final Http2ClientShutdownListener shutdownListener = new Http2ClientShutdownListener(cacheDir);
 				COREUTILS_CONTEXT.addShutdownListener(shutdownListener, Http2ClientShutdownListener.class, "coreutils-fiber");
-				final Cache cache = new Cache(cacheDir, CACHE_SIZE_MIB);					
+				final Cache cache = new Cache(cacheDir, cacheSize);					
 				client.setCache(cache);				
 			} catch (IOException e) {
 				LOGGER.error("Failed to create directory cache", e);
@@ -96,7 +102,7 @@ public final class Http2Clients {
 	 * @author Erik Torres <etserrano@gmail.com>
 	 * @since 0.2.0
 	 */
-	public static class Http2ClientShutdownListener extends ShutdownListener {
+	public static class Http2ClientShutdownListener extends BaseShutdownListener {
 
 		private final File cacheDir;
 

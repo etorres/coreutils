@@ -21,29 +21,25 @@
  * that you distribute must include a readable copy of the "NOTICE" text file.
  */
 
-package es.upv.grycap.coreutils.common;
+package es.upv.grycap.coreutils.common.config;
+
+import com.typesafe.config.Config;
 
 /**
- * Shutdown listener.
+ * An event indicating that the configuration has been updated.
  * @author Erik Torres <etserrano@gmail.com>
  * @since 0.2.0
  */
-public interface ShutdownListener {
+public final class ConfigurationChangedEvent {
 	
-	/**
-	 * Gets the status of the listener. Implementations should check that the value returned by this method is <tt>true</tt> before entering the stop sequence.
-	 * @return
-	 */
-	boolean isRunning();
+	private final Config config;
 
-	/**
-	 * Calling this method should set the value of {@link #isRunning()} to <tt>true</tt> before of after executing the initialization routine.
-	 */
-	void init();
-	
-	/**
-	 * Calling this method should set the value of {@link #isRunning()} to <tt>false</tt> before entering the stop sequence.
-	 */
-	void stop();
+	public ConfigurationChangedEvent(final Config config) {
+		this.config = config;
+	}
+
+	public Config getConfig() {
+		return config;
+	}	
 	
 }

@@ -21,29 +21,24 @@
  * that you distribute must include a readable copy of the "NOTICE" text file.
  */
 
-package es.upv.grycap.coreutils.common;
+package es.upv.grycap.coreutils.common.events;
+
+import java.util.concurrent.Executor;
+
+import com.google.common.eventbus.AsyncEventBus;
 
 /**
- * Shutdown listener.
+ * Allows publish-subscribe-style communication between components without requiring the coreutils components to explicitly register with one another.
  * @author Erik Torres <etserrano@gmail.com>
  * @since 0.2.0
  */
-public interface ShutdownListener {
-	
-	/**
-	 * Gets the status of the listener. Implementations should check that the value returned by this method is <tt>true</tt> before entering the stop sequence.
-	 * @return
-	 */
-	boolean isRunning();
+public class CoreUtilsEventBus extends AsyncEventBus {
 
-	/**
-	 * Calling this method should set the value of {@link #isRunning()} to <tt>true</tt> before of after executing the initialization routine.
-	 */
-	void init();
-	
-	/**
-	 * Calling this method should set the value of {@link #isRunning()} to <tt>false</tt> before entering the stop sequence.
-	 */
-	void stop();
-	
+	public static final String EVENT_BUS_NAME = "coreutils-eventbus";
+
+	public CoreUtilsEventBus(final Executor executor) {
+		super(EVENT_BUS_NAME, executor);
+		register(new DeadEventListener());
+	}
+
 }

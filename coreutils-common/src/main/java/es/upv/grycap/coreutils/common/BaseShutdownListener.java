@@ -23,27 +23,33 @@
 
 package es.upv.grycap.coreutils.common;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 /**
- * Shutdown listener.
+ * SImplements a generic shutdown listener that uses an {@link AtomicBoolean} to synchronize the stop sequence.
  * @author Erik Torres <etserrano@gmail.com>
  * @since 0.2.0
  */
-public interface ShutdownListener {
-	
-	/**
-	 * Gets the status of the listener. Implementations should check that the value returned by this method is <tt>true</tt> before entering the stop sequence.
-	 * @return
-	 */
-	boolean isRunning();
+public abstract class BaseShutdownListener implements ShutdownListener {
 
 	/**
-	 * Calling this method should set the value of {@link #isRunning()} to <tt>true</tt> before of after executing the initialization routine.
+	 * Maintains the status of the instance.
 	 */
-	void init();
-	
-	/**
-	 * Calling this method should set the value of {@link #isRunning()} to <tt>false</tt> before entering the stop sequence.
-	 */
-	void stop();
-	
+	protected final AtomicBoolean isRunning = new AtomicBoolean(false);	
+
+	@Override
+	public boolean isRunning() {
+		return isRunning.get();
+	}
+
+	@Override
+	public void init() {
+		isRunning.compareAndSet(false, true);
+	}
+
+	@Override
+	public void stop() {
+		if (!isRunning.getAndSet(false)) return;
+	}
+
 }

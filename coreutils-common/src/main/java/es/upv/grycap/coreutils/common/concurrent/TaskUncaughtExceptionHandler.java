@@ -21,29 +21,27 @@
  * that you distribute must include a readable copy of the "NOTICE" text file.
  */
 
-package es.upv.grycap.coreutils.common;
+package es.upv.grycap.coreutils.common.concurrent;
+
+import static org.slf4j.LoggerFactory.getLogger;
+
+import java.lang.Thread.UncaughtExceptionHandler;
+
+import org.slf4j.Logger;
 
 /**
- * Shutdown listener.
+ * Handles possible uncaught {@link RuntimeException} thrown by threaded tasks. When a thread terminates abnormally class simply 
+ * writes a message to the logging system, which will not hang the JVM.
  * @author Erik Torres <etserrano@gmail.com>
  * @since 0.2.0
  */
-public interface ShutdownListener {
-	
-	/**
-	 * Gets the status of the listener. Implementations should check that the value returned by this method is <tt>true</tt> before entering the stop sequence.
-	 * @return
-	 */
-	boolean isRunning();
+public class TaskUncaughtExceptionHandler implements UncaughtExceptionHandler {
 
-	/**
-	 * Calling this method should set the value of {@link #isRunning()} to <tt>true</tt> before of after executing the initialization routine.
-	 */
-	void init();
-	
-	/**
-	 * Calling this method should set the value of {@link #isRunning()} to <tt>false</tt> before entering the stop sequence.
-	 */
-	void stop();
-	
+	private final static Logger LOGGER = getLogger(TaskUncaughtExceptionHandler.class);
+
+	@Override
+	public void uncaughtException(final Thread thread, final Throwable cause) {
+		LOGGER.error(String.format("Thread %s terminates abnormally", thread.getName()), cause);
+	}
+
 }

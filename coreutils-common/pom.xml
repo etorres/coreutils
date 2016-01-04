@@ -73,16 +73,16 @@ that you distribute must include a readable copy of the "NOTICE" text file.
 			<artifactId>config</artifactId>
 		</dependency>
 		
-		<!-- SLF4J logging framework -->
+		<!-- Logback and SLF4J logging framework -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<scope>provided</scope>
-		</dependency>
-		<dependency> <!-- SLF4J Simple binding -->
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-simple</artifactId>
-			<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>

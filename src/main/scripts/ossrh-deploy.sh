@@ -33,6 +33,9 @@
 # http://central.sonatype.org/pages/apache-maven.html
 # http://central.sonatype.org/pages/ossrh-guide.html
 #
+# Note that if autoReleaseAfterClose value is set to true in your POM file, 
+# then the project will be also released to the Maven Central Repository.
+#
 # Recommended use: 1) change to the root directory of your project; and 
 # 2) execute this script.
 ###
@@ -42,7 +45,7 @@ read -p "Confirm deployment of current Maven project to OSSRH (yes/no)? "
 if [ "$REPLY" == "yes" ] ; then
   ssh-add ~/.ssh/id_rsa
   ssh-add -l
-  mvn clean deploy | tee target/ossrh-deploy.log
+  mvn -Dgrycap.deploy.release=true clean deploy | tee ossrh-deploy.log
   ssh-add -D
 else
   echo "Exit without deploy"

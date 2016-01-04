@@ -86,6 +86,7 @@ public class TaskRunner implements ShutdownListener {
 
 	/**
 	 * Submits a new task for execution to the pool of threads managed by this class.
+	 * @param <T> - specific type of supplier
 	 * @param supplier - a function returning the value to be used to complete the returned {@link CompletableFuture}
 	 * @return a {@link CompletableFuture} that the caller can use to track the execution of the task and to register a callback function.
 	 */

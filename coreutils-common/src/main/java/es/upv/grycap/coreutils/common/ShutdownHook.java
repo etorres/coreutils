@@ -52,6 +52,7 @@ public class ShutdownHook {
 
 	/**
 	 * Creates an instance of this class and registers it with the JVM.
+	 * @param waitTerminationTimeout - will wait this time on JVM shutdown before raising a timeout exception
 	 */
 	public ShutdownHook(final long waitTerminationTimeout) {
 		final long waitTerminationTimeout2 = WAIT_TERMINATION_TIMEOUT_RANGE.contains(waitTerminationTimeout) ? waitTerminationTimeout 

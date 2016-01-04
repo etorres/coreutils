@@ -115,6 +115,7 @@ public enum CoreutilsContext {
 
 	/**
 	 * Gets a client from the registry.
+	 * @param <T> - specific type of client
 	 * @param type - the expected type of client
 	 * @return An instance that matches the specified type, or <tt>null</tt> if no instance with the specified properties is 
 	 *         found in the registry.
@@ -126,6 +127,7 @@ public enum CoreutilsContext {
 
 	/**
 	 * Gets a client from the registry. Callers can optionally specify a classifier.
+	 * @param <T> - specific type of client
 	 * @param type - the expected type of client
 	 * @param classifier - (optional) only clients matching the classifier will be selected 
 	 * @return An instance that matches the specified type and classifier, or <tt>null</tt> if no instance with the specified 
@@ -138,7 +140,8 @@ public enum CoreutilsContext {
 
 	/**
 	 * Gets a client from the registry. In case that no instance with the specified properties is found in the registry, the
-	 * optional supplier will be used to create a new instance that will be registered. 
+	 * optional supplier will be used to create a new instance that will be registered.
+	 * @param <T> - specific type of client
 	 * @param type - the expected type of client
 	 * @param supplier - (optional) client factory
 	 * @return An instance that matches the specified type, or a new instance created with the supplier if no instance with 
@@ -152,6 +155,7 @@ public enum CoreutilsContext {
 	/**
 	 * Gets a client from the registry. Callers can optionally specify a classifier. In case that no instance with the specified 
 	 * properties is found in the registry, the optional supplier will be used to create a new instance that will be registered.
+	 * @param <T> - specific type of client
 	 * @param type - the expected type of client
 	 * @param classifier - (optional) only clients matching the classifier will be selected
 	 * @param supplier - (optional) client factory
@@ -165,6 +169,7 @@ public enum CoreutilsContext {
 
 	/**
 	 * Registers a new shutdown listener for the specified type.
+	 * @param <T> - specific type of shutdown listener
 	 * @param listener - the listener that will be registered
 	 * @param type - the type of the shutdown listener
 	 */
@@ -174,6 +179,7 @@ public enum CoreutilsContext {
 
 	/**
 	 * Registers a new shutdown listener for the specified type with an optional classifier.
+	 * @param <T> - specific type of shutdown listener
 	 * @param listener - the listener that will be registered
 	 * @param type - the type of the shutdown listener
 	 * @param classifier - (optional) add this classifier to the registry
@@ -186,6 +192,7 @@ public enum CoreutilsContext {
 
 	/**
 	 * Unregister a shutdown listener.
+	 * @param <T> - specific type of shutdown listener
 	 * @param type - the type of the shutdown listener	
 	 */
 	public <T extends ShutdownListener> void removeShutdownListener(final Class<T> type) {
@@ -194,6 +201,7 @@ public enum CoreutilsContext {
 
 	/**
 	 * Unregister a shutdown listener.
+	 * @param <T> - specific type of shutdown listener
 	 * @param type - the type of the shutdown listener
 	 * @param classifier - (optional) classifier
 	 */

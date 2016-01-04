@@ -6,10 +6,13 @@ Utilities to facilitate Java applications development.
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/grycap/coreutils/blob/master/LICENSE)
 [![Build Status](https://api.travis-ci.org/grycap/coreutils.svg)](https://travis-ci.org/grycap/coreutils/builds)
 [![Coverage Status](https://coveralls.io/repos/grycap/coreutils/badge.svg?branch=master&service=github)](https://coveralls.io/github/grycap/coreutils?branch=master)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/es.upv.grycap.coreutils/coreutils/badge.svg)](https://maven-badges.herokuapp.com/maven-central/es.upv.grycap.coreutils/coreutils)
 
 ## Environment variables
 
-``GRYCAP_TESTS_PRINT_OUTPUT`` set value to ``true`` to print tests output.
+``grycap.tests.print.out`` set value to ``true`` to print tests output.
+
+``grycap.deploy.release`` set value to ``true`` to release the project to the Maven Central repository.
 
 ## Installation
 

@@ -32,7 +32,7 @@ public interface ShutdownListener {
 	
 	/**
 	 * Gets the status of the listener. Implementations should check that the value returned by this method is <tt>true</tt> before entering the stop sequence.
-	 * @return
+	 * @return the current status of this listener
 	 */
 	boolean isRunning();
 

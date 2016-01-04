@@ -23,13 +23,7 @@ that you distribute must include a readable copy of the "NOTICE" text file.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	
-	<parent>
-		<groupId>org.sonatype.oss</groupId>
-		<artifactId>oss-parent</artifactId>
-		<version>9</version>
-	</parent>
+	<modelVersion>4.0.0</modelVersion>	
 	
 	<groupId>es.upv.grycap.coreutils</groupId>
 	<artifactId>coreutils</artifactId>
@@ -94,6 +88,13 @@ that you distribute must include a readable copy of the "NOTICE" text file.
 		<maven-surefire-plugin.version>2.19</maven-surefire-plugin.version>		
 		<mockserver-maven-plugin.version>3.10.2</mockserver-maven-plugin.version>
 	</properties>
+	
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
 	
 	<dependencyManagement>
 		<dependencies>
@@ -353,7 +354,8 @@ that you distribute must include a readable copy of the "NOTICE" text file.
 						<quiet>true</quiet>						
 					</configuration>
 				</plugin>
-				<plugin> <!-- Override outdated versions from OSS -->
+				<!-- TODO -->
+				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-release-plugin</artifactId>
 					<version>2.5.3</version>
@@ -392,6 +394,58 @@ that you distribute must include a readable copy of the "NOTICE" text file.
 				<artifactId>coveralls-maven-plugin</artifactId>
 				<version>4.0.0</version>				
 			</plugin>
+			<!-- Generate project's sources -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- Generate API documentation -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- Sign the generated components -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- Configure release deployment to the OSSRH Nexus server with the Nexus Staging Maven plugin -->
+			<plugin>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<version>1.6.6</version>
+				<extensions>true</extensions>
+				<configuration>
+					<serverId>ossrh</serverId>
+					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+					<autoReleaseAfterClose>true</autoReleaseAfterClose>
+				</configuration>
+			</plugin>			
 		</plugins>
 	</build>
 	

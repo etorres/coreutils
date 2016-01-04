@@ -48,7 +48,7 @@ import okio.BufferedSink;
 
 /**
  * HTTP+SPDY client.
- * @author Erik Torres <etserrano@gmail.com>
+ * @author Erik Torres
  * @since 0.1.0
  */
 public final class Http2Client {
@@ -184,7 +184,7 @@ public final class Http2Client {
 
 	/**
 	 * Delete HTTP method.
-	 * @param supplier - supplies the content of this request
+	 * @param url - URL target of this request
 	 * @param callback - is called back when the response is readable
 	 */
 	public void asyncDelete(final String url, final Callback callback) {

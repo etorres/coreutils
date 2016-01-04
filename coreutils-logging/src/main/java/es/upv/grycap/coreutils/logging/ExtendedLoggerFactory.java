@@ -29,7 +29,7 @@ import org.slf4j.Logger;
 
 /**
  * Wraps the SLF4J {@link org.slf4j.LoggerFactory}
- * @author Erik Torres <etserrano@gmail.com>
+ * @author Erik Torres
  * @since 0.1.0
  */
 public final class ExtendedLoggerFactory {

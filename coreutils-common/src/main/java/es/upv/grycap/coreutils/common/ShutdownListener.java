@@ -25,7 +25,7 @@ package es.upv.grycap.coreutils.common;
 
 /**
  * Shutdown listener.
- * @author Erik Torres <etserrano@gmail.com>
+ * @author Erik Torres
  * @since 0.2.0
  */
 public interface ShutdownListener {

@@ -27,7 +27,7 @@ package es.upv.grycap.coreutils.fiber.test.mockserver;
  * Creates objects using standard data formats. Despite the format, all objects include a recognizable identifier in the
  * form: coreutils -> objectId -> <tt>Integer</tt>. All objects are valid, well-formed documents that can be parsed
  * with standard tools.
- * @author Erik Torres <etserrano@gmail.com>
+ * @author Erik Torres
  * @since 0.1.0
  * @see <a href="http://json.org/example.html">JSON Example</a>
  */

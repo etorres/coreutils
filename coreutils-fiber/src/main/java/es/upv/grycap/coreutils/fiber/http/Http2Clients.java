@@ -46,7 +46,7 @@ import es.upv.grycap.coreutils.common.config.Configurer;
 
 /**
  * Factory class that creates new {@link Http2Client} instances.
- * @author Erik Torres <etserrano@gmail.com>
+ * @author Erik Torres
  * @since 0.2.0
  */
 public final class Http2Clients {
@@ -99,7 +99,7 @@ public final class Http2Clients {
 
 	/**
 	 * Shutdown listener to delete cache directory on application exit.
-	 * @author Erik Torres <etserrano@gmail.com>
+	 * @author Erik Torres
 	 * @since 0.2.0
 	 */
 	public static class Http2ClientShutdownListener extends BaseShutdownListener {

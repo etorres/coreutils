@@ -29,7 +29,7 @@ import com.google.common.eventbus.AsyncEventBus;
 
 /**
  * Allows publish-subscribe-style communication between components without requiring the coreutils components to explicitly register with one another.
- * @author Erik Torres <etserrano@gmail.com>
+ * @author Erik Torres
  * @since 0.2.0
  */
 public class CoreUtilsEventBus extends AsyncEventBus {

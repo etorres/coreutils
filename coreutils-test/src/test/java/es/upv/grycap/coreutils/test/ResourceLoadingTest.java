@@ -46,7 +46,7 @@ import es.upv.grycap.coreutils.test.util.ResourceLoadingUtils;
 
 /**
  * Tests resource loading utilities provided by {@link ResourceLoadingUtils}.
- * @author Erik Torres <etserrano@gmail.com>
+ * @author Erik Torres
  * @since 0.1.0
  */
 @Category(FunctionalTests.class)

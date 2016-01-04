@@ -45,7 +45,7 @@ import com.google.common.collect.ImmutableList;
 
 /**
  * Sets Mock Server expectations for fetching tests.
- * @author Erik Torres <etserrano@gmail.com>
+ * @author Erik Torres
  * @since 0.1.0
  */
 public class FiberExpectationInitializer implements ExpectationInitializer {

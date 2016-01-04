@@ -46,7 +46,7 @@ import org.apache.http.client.utils.URLEncodedUtils;
 
 /**
  * Builder for {@link URL} instances.
- * @author Erik Torres <etserrano@gmail.com>
+ * @author Erik Torres
  * @since 0.1.0
  */
 public class UrlBuilder {
@@ -85,7 +85,7 @@ public class UrlBuilder {
 	 * fragment can also include parameters that will be added to the created URL. The created URL is normalized 
 	 * and unencoded before returning it to the caller. The current implementation has the following limitations:
 	 * <ul>
-	 * <li>Arrays are not supported: <tt>q=foo&q=bar</tt> will produce an error.</li>
+	 * <li>Arrays are not supported: <tt>q=foo&amp;q=bar</tt> will produce an error.</li>
 	 * <li>Internal references are only supported in the base URL. Any additional reference provided with the 
 	 * fragment will be silently ignored: the fragment <tt>/rd#ref</tt> will be appended to the base URL as
 	 * <tt>/rd</tt>, ignoring the internal reference.</li>

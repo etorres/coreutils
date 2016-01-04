@@ -32,7 +32,7 @@ import com.google.common.eventbus.Subscribe;
 
 /**
  * Listener waiting for events that were posted but not delivered to anyone.
- * @author Erik Torres <etserrano@gmail.com>
+ * @author Erik Torres
  * @since 0.2.0
  */
 public final class DeadEventListener {

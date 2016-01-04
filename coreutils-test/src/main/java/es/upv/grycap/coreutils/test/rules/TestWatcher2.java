@@ -33,7 +33,7 @@ import org.junit.runner.Description;
 
 /**
  * Keeps a log of each passing and failing test.
- * @author Erik Torres <etserrano@gmail.com>
+ * @author Erik Torres
  * @since 0.1.0
  */
 public class TestWatcher2 extends TestWatcher {	

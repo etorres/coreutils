@@ -29,7 +29,7 @@ import java.util.Map;
 
 /**
  * Defines expectation responses for requests made with the HTTP GET method.
- * @author Erik Torres <etserrano@gmail.com>
+ * @author Erik Torres
  * @since 0.1.0
  */
 public class ExpectationHttpGetResponse extends AbstractExpectationResponse {

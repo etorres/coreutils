@@ -49,7 +49,7 @@ import es.upv.grycap.coreutils.test.rules.TestWatcher2;
 
 /**
  * Tests the log manager.
- * @author Erik Torres <etserrano@gmail.com>
+ * @author Erik Torres
  * @since 0.1.0
  */
 @Category(FunctionalTests.class)
@@ -113,7 +113,7 @@ public class LogManagerTest {
 
 	/**
 	 * Dummy class.
-	 * @author Erik Torres <etserrano@gmail.com>
+	 * @author Erik Torres
 	 * @since 0.1.0
 	 */
 	public static class DummyClass { }

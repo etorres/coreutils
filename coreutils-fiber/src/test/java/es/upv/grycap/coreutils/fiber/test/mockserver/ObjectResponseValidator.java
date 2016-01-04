@@ -53,7 +53,7 @@ import org.xml.sax.SAXException;
 
 /**
  * Validates object responses.
- * @author Erik Torres <etserrano@gmail.com>
+ * @author Erik Torres
  * @since 0.1.0
  */
 public final class ObjectResponseValidator {

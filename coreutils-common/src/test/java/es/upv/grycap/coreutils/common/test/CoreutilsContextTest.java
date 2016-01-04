@@ -48,14 +48,14 @@ import es.upv.grycap.coreutils.test.rules.TestWatcher2;
 
 /**
  * Tests the context.
- * @author Erik Torres <etserrano@gmail.com>
+ * @author Erik Torres
  * @since 0.2.0
  */
 @Category(FunctionalTests.class)
 public class CoreutilsContextTest {
 
 	@Rule
-	public TestPrinter pw = new TestPrinter(true);
+	public TestPrinter pw = new TestPrinter();
 
 	@Rule
 	public TestRule watchman = new TestWatcher2(pw);
@@ -97,7 +97,7 @@ public class CoreutilsContextTest {
 
 	/**
 	 * Client mock-up.
-	 * @author Erik Torres <etserrano@gmail.com>
+	 * @author Erik Torres
 	 * @since 0.2.0
 	 */
 	public static class FakeClient {
@@ -126,7 +126,7 @@ public class CoreutilsContextTest {
 
 	/**
 	 * Shutdown listener mock-up.
-	 * @author Erik Torres <etserrano@gmail.com>
+	 * @author Erik Torres
 	 * @since 0.2.0
 	 */
 	public static class FakeShutdownListener extends BaseShutdownListener { }

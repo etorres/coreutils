@@ -25,7 +25,7 @@ package es.upv.grycap.coreutils.test.category;
 
 /**
  * Categorize tests that belongs to the integration testing group.
- * @author Erik Torres <etserrano@gmail.com>
+ * @author Erik Torres
  * @since 0.1.0
  */
 public interface IntegrationTests { }

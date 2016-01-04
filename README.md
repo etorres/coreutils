@@ -39,6 +39,5 @@ Utilities to facilitate Java applications development.
 
 1. Improve documentation: this is not framework, this is not a utility library. If you need a framework, we recommend Spring (Spring Boot, Spring Data, Spring REST and Spring Cloud) as a full-featured framework. For small and medium-sized projects we recommend the Jodd micro-framework. http://jodd.org/ ...
 2. Migrate part of the naming utilities.
-3. HTTP2 client: get access to the original instance (OkHttpClient) using the clone method in the case of the manager client.
+3. HTTP2 client: get access to the original instance (OkHttpClient) using the clone method in the case of the managed client.
 4. Check that query parameters are proxied in opengateway.
-5. Add global shutdown hook and register tasks.

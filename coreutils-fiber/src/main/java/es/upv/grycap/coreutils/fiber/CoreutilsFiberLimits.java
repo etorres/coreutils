@@ -29,7 +29,7 @@ import es.upv.grycap.coreutils.common.CoreutilsLimits;
 
 /**
  * Extends limits for this component.
- * @author Erik Torres <etserrano@gmail.com>
+ * @author Erik Torres
  * @since 0.2.0
  */
 public interface CoreutilsFiberLimits extends CoreutilsLimits {

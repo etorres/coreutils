@@ -46,7 +46,7 @@ import es.upv.grycap.coreutils.test.rules.TestWatcher2;
 
 /**
  * Tests fetcher with invalid inputs.
- * @author Erik Torres <etserrano@gmail.com>
+ * @author Erik Torres
  * @since 0.1.0
  */
 @Category(SanityTests.class)

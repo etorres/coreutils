@@ -37,7 +37,7 @@ import javax.annotation.concurrent.ThreadSafe;
 /**
  * Executes a shutdown sequence when the JVM shutdowns, calling the {@link ShutdownListener#stop()} method of the registered listeners 
  * and waiting until they finish or a timeout expires.
- * @author Erik Torres <etserrano@gmail.com>
+ * @author Erik Torres
  * @since 0.2.0
  */
 @ThreadSafe

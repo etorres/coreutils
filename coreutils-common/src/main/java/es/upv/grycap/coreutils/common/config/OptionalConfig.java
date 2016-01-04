@@ -34,7 +34,7 @@ import com.typesafe.config.Config;
 
 /**
  * Extends configuration with optional settings.
- * @author Erik Torres <etserrano@gmail.com>
+ * @author Erik Torres
  * @since 0.2.0
  */
 public class OptionalConfig {

@@ -52,7 +52,7 @@ import net.jodah.concurrentunit.Waiter;
 
 /**
  * Tests the {@link Http2Client} under highly concurrency conditions.
- * @author Erik Torres <etserrano@gmail.com>
+ * @author Erik Torres
  * @since 0.1.0
  */
 @Category(IntegrationTests.class)

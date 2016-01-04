@@ -49,7 +49,7 @@ import es.upv.grycap.coreutils.common.events.CoreUtilsEventBus;
 
 /**
  * Lightweight and unopinionated central class for providing configuration information to a coreutils-powered application.
- * @author Erik Torres <etserrano@gmail.com>
+ * @author Erik Torres
  * @since 0.2.0
  */
 @ThreadSafe
@@ -271,7 +271,7 @@ public enum CoreutilsContext {
 
 	/**
 	 * The different types of objects that can be stored within this context.
-	 * @author Erik Torres <etserrano@gmail.com>
+	 * @author Erik Torres
 	 * @since 0.2.0
 	 */
 	private enum ContextKey {
@@ -281,7 +281,7 @@ public enum CoreutilsContext {
 
 	/**
 	 * Provides a reference to a boolean variable but without the synchronization cost of a atomic type.
-	 * @author Erik Torres <etserrano@gmail.com>
+	 * @author Erik Torres
 	 * @since 0.2.0
 	 */
 	private static class BooleanReference {

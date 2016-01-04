@@ -68,7 +68,7 @@ import es.upv.grycap.coreutils.test.rules.TestWatcher2;
 
 /**
  * Tests data fetching.
- * @author Erik Torres <etserrano@gmail.com>
+ * @author Erik Torres
  * @since 0.1.0
  */
 @RunWith(Parameterized.class)

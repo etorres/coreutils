@@ -35,7 +35,7 @@ import com.google.gson.GsonBuilder;
 /**
  * Provides common methods for printing objects during tests execution. This class can be configured to silently ignore
  * print operations, producing no output.
- * @author Erik Torres <etserrano@gmail.com>
+ * @author Erik Torres
  * @since 0.1.0
  */
 public class TestPrinter extends ExternalResource {
@@ -116,7 +116,7 @@ public class TestPrinter extends ExternalResource {
 
 	/**
 	 * Supported output formats.
-	 * @author Erik Torres <ertorser@upv.es>
+	 * @author Erik Torres
 	 */
 	public enum OutputFormat {
 		JSON,
@@ -125,7 +125,7 @@ public class TestPrinter extends ExternalResource {
 
 	/**
 	 * Lazy initialization of Gson-based JSON processor.
-	 * @author Erik Torres <ertorser@upv.es>
+	 * @author Erik Torres
 	 */
 	private static class GsonHelper {		
 		public static final Gson gson = new GsonBuilder().setPrettyPrinting().create();

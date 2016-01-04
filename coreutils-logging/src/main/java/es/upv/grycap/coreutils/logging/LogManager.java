@@ -34,7 +34,7 @@ import org.slf4j.Logger;
 
 /**
  * Manages loggers, installing the necessary bridges to unify logging across an entire library, service or application.
- * @author Erik Torres <etserrano@gmail.com>
+ * @author Erik Torres
  * @since 0.1.0
  */
 public class LogManager {
@@ -50,8 +50,8 @@ public class LogManager {
 	}
 
 	/**
-	 * The logging system is automatically configured when the method {@link LogManager#getLogger(Class)} is called. 
-	 * This method is conveniently provided to initialize the logging system before creating any logger with this class.
+	 * The logging system is automatically configured when the method {@link es.upv.grycap.coreutils.logging.ExtendedLoggerFactory#getLogger(Class)}
+	 * is called. This method is conveniently provided to initialize the logging system before creating any logger with this class.
 	 * Also, you can call this method to initialize the logging system without modifying your code (creating loggers 
 	 * with SLF4J or other logging framework).
 	 */

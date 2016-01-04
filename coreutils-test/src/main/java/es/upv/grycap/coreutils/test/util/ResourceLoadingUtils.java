@@ -39,7 +39,7 @@ import javax.annotation.Nullable;
 
 /**
  * Utilities to load test resources from class-path and file-system.
- * @author Erik Torres <etserrano@gmail.com>
+ * @author Erik Torres
  * @since 0.1.0
  */
 public class ResourceLoadingUtils {
@@ -105,7 +105,7 @@ public class ResourceLoadingUtils {
 
 	/**
 	 * A filename filter that matches the files by their extension.
-	 * @author Erik Torres <etserrano@gmail.com>
+	 * @author Erik Torres
 	 * @since 0.1.0
 	 */
 	public static class ExtensionFilter implements FilenameFilter {

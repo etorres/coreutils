@@ -36,7 +36,7 @@ import com.typesafe.config.ConfigParseOptions;
 
 /**
  * Configuration loader.
- * @author Erik Torres <etserrano@gmail.com>
+ * @author Erik Torres
  * @since 0.1.0
  */
 public class Configurer {

@@ -50,7 +50,7 @@ import es.upv.grycap.coreutils.common.ShutdownListener;
 /**
  * Runs tasks in a pool of threads that must be disposed as part of the application termination. Tasks are submitted to the pool of threads 
  * for execution and a {@link CompletableFuture} is returned to the caller.
- * @author Erik Torres <etserrano@gmail.com>
+ * @author Erik Torres
  * @since 0.2.0
  */
 @ThreadSafe

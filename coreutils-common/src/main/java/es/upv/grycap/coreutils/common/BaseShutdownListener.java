@@ -27,7 +27,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * SImplements a generic shutdown listener that uses an {@link AtomicBoolean} to synchronize the stop sequence.
- * @author Erik Torres <etserrano@gmail.com>
+ * @author Erik Torres
  * @since 0.2.0
  */
 public abstract class BaseShutdownListener implements ShutdownListener {

@@ -25,7 +25,7 @@ package es.upv.grycap.coreutils.test.category;
 
 /**
  * Categorize unit tests that belongs to the functional testing group.
- * @author Erik Torres <etserrano@gmail.com>
+ * @author Erik Torres
  * @since 0.1.0
  */
 public interface FunctionalTests { }

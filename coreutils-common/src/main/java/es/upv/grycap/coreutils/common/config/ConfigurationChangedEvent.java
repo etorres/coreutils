@@ -27,7 +27,7 @@ import com.typesafe.config.Config;
 
 /**
  * An event indicating that the configuration has been updated.
- * @author Erik Torres <etserrano@gmail.com>
+ * @author Erik Torres
  * @since 0.2.0
  */
 public final class ConfigurationChangedEvent {

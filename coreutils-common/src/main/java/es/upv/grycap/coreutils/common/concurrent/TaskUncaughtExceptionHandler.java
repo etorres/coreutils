@@ -32,7 +32,7 @@ import org.slf4j.Logger;
 /**
  * Handles possible uncaught {@link RuntimeException} thrown by threaded tasks. When a thread terminates abnormally class simply 
  * writes a message to the logging system, which will not hang the JVM.
- * @author Erik Torres <etserrano@gmail.com>
+ * @author Erik Torres
  * @since 0.2.0
  */
 public class TaskUncaughtExceptionHandler implements UncaughtExceptionHandler {

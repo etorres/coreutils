@@ -78,7 +78,7 @@ import es.upv.grycap.coreutils.fiber.net.UrlBuilder;
  * where the suffix <tt>.partial</tt> is appended to the filenames to differentiate between files completely retrieved and 
  * files being fetched. Once the download complete, the file is moved to its final destination, by simply removing the suffix
  * from the filename and renaming the file. 
- * @author Erik Torres <etserrano@gmail.com>
+ * @author Erik Torres
  * @since 0.1.0
  */
 public class HttpDataFetcher {
@@ -225,7 +225,7 @@ public class HttpDataFetcher {
 
 	/**
 	 * Extends Java 8 {@link CompletableFuture} with real cancellation that will attempt to cancel the requests managed by this future.
-	 * @author Erik Torres <etserrano@gmail.com>
+	 * @author Erik Torres
 	 * @since 0.0.1
 	 * @see <a href="https://dzone.com/articles/completablefuture-cant-be">CompletableFuture can't be Interrupted</a>
 	 */
@@ -258,7 +258,7 @@ public class HttpDataFetcher {
 
 	/**
 	 * Monitors fetch operation status.
-	 * @author Erik Torres <etserrano@gmail.com>
+	 * @author Erik Torres
 	 * @since 0.0.1
 	 */
 	private static class FetchMonitor {
@@ -283,7 +283,7 @@ public class HttpDataFetcher {
 
 	/**
 	 * Possible status after object fetching.
-	 * @author Erik Torres <etserrano@gmail.com>
+	 * @author Erik Torres
 	 * @since 0.0.1
 	 */
 	public enum FetchStatus {

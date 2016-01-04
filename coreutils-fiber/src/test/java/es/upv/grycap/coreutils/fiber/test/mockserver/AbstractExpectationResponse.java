@@ -31,7 +31,7 @@ import org.mockserver.model.Parameter;
 
 /**
  * Base definition of response expectations.
- * @author Erik Torres <etserrano@gmail.com>
+ * @author Erik Torres
  * @since 0.1.0
  */
 public class AbstractExpectationResponse {

@@ -1,15 +1,13 @@
 # Core Utils: tools to facilitate the development of Java-based applications
 
-The _coreutils_ project contains several core libraries that deal with the following aspects of software development: providing common and extensible configuration across different application modules, executing ordered shutdown sequences when the JVM shutdowns, running tasks in a custom thread pool, allowing publish-subscribe-style communication between components without requiring them to explicitly register with one another, providing commonly-used clients (HTTP, REST) integrated with with green threads (fibers) to minimize the performance impact in virtual environments, installing logging bridges to unify logging across the entire application, maintaining testing groups and rules.
-
-This project requires Java 1.8 or higher.
-
-## Master Build Status
-
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/grycap/coreutils/blob/master/LICENSE)
 [![Build Status](https://api.travis-ci.org/grycap/coreutils.svg)](https://travis-ci.org/grycap/coreutils/builds)
 [![Coverage Status](https://coveralls.io/repos/grycap/coreutils/badge.svg?branch=master&service=github)](https://coveralls.io/github/grycap/coreutils?branch=master)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/es.upv.grycap.coreutils/coreutils/badge.svg)](https://maven-badges.herokuapp.com/maven-central/es.upv.grycap.coreutils/coreutils)
+
+The _coreutils_ project contains several core libraries that deal with the following aspects of software development: providing common and extensible configuration across different application modules, executing ordered shutdown sequences when the JVM shutdowns, running tasks in a custom thread pool, allowing publish-subscribe-style communication between components without requiring them to explicitly register with one another, providing commonly-used clients (HTTP, REST) integrated with with green threads (fibers) to minimize the performance impact in virtual environments, installing logging bridges to unify logging across the entire application, maintaining testing groups and rules.
+
+This project requires Java 1.8 or higher.
 
 ## What is _coreutils_?
 
